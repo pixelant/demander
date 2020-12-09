@@ -13,6 +13,6 @@ class DemandRestriction implements QueryRestrictionInterface
 {
     public function buildExpression(array $queriedTables, ExpressionBuilder $expressionBuilder): CompositeExpression
     {
-        // TODO: Implement buildExpression() method.
+        return $expressionBuilder->andX([]);
     }
 }
