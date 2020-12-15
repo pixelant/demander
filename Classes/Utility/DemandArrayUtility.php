@@ -21,7 +21,7 @@ class DemandArrayUtility
      * @param string $field
      * @return string
      */
-    public static function tableAndFieldNameToString(string $table, string $field): string
+    public static function tableAndFieldNameToPropertyName(string $table, string $field): string
     {
 
     }
@@ -32,7 +32,7 @@ class DemandArrayUtility
      * @param string $string
      * @return array|null
      */
-    public static function stringToTableAndFieldName(string $string): ?array
+    public static function propertyNameToTableAndFieldName(string $string): ?array
     {
 
     }
