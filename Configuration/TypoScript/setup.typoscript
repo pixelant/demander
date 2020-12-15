@@ -9,4 +9,8 @@ config.tx_demander {
   demands {
     // Configurable demands array used by Pixelant\Demander\DemandProvider\TypoScriptDemandProvider
   }
+
+  ui {
+    // A TypoScript implmentation of a subset of the TCA. Overrides any configuration from TCA for frontend rendering.
+  }
 }
