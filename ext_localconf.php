@@ -9,10 +9,10 @@
         \TYPO3\CMS\Core\Database\Query\Restriction\StartTimeRestriction::class,
         \TYPO3\CMS\Core\Database\Query\Restriction\EndTimeRestriction::class,
         \TYPO3\CMS\Core\Database\Query\Restriction\FrontendGroupRestriction::class,
-        \Pixelant\Demander\Database\Query\Restriction\DemandRestriction::class,
+        \Pixelant\Demander\Query\Restriction\DemandRestriction::class,
     ];
 
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Core\Database\Query\Restriction\FrontendRestrictionContainer::class] = [
-        'className' => \Pixelant\Demander\Database\Query\Restriction\FrontendRestrictionContainer::class
+        'className' => \Pixelant\Demander\Query\Restriction\FrontendRestrictionContainer::class
     ];
 })();

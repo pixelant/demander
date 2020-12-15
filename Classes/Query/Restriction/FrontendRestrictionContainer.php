@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Demander\Database\Query\Restriction;
+namespace Pixelant\Demander\Query\Restriction;
 
 
 use TYPO3\CMS\Core\Context\Context;
