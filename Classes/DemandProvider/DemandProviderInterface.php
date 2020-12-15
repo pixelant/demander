@@ -21,6 +21,8 @@ interface DemandProviderInterface
      *         'operator' => '-'
      *         'value' => [min, max]
      *     ],
+     *     'and' => [...],
+     *     'or' => [...],
      * ]
      *
      * Operators:

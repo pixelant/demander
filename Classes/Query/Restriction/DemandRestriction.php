@@ -11,6 +11,9 @@ use TYPO3\CMS\Core\Database\Query\Restriction\QueryRestrictionInterface;
 
 class DemandRestriction implements QueryRestrictionInterface
 {
+    /**
+     * @inheritDoc
+     */
     public function buildExpression(array $queriedTables, ExpressionBuilder $expressionBuilder): CompositeExpression
     {
         return $expressionBuilder->andX([]);
