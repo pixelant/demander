@@ -1,0 +1,9 @@
+
+TCEMAIN.linkHandler.demander {
+  handler = Pixelant\Demander\LinkHandler\DemandLinkHandler
+  label = LLL:EXT:demander/Resources/Private/Language/locallang_be.xlf:linkHandler.label
+  configuration {
+
+  }
+  scanAfter = page
+}

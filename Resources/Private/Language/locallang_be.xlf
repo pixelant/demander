@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2021-01-11T13:00:00Z" product-name="demander">
+		<header/>
+		<body>
+			<trans-unit id="linkHandler.label" xml:space="preserve">
+				<source>Filtered Results</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
