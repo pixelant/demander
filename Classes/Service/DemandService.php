@@ -333,11 +333,11 @@ class DemandService implements \TYPO3\CMS\Core\SingletonInterface
     /**
      * Add sorting to QueryBuilder from demands.
      *
-     * @param QueryBuilder $queryBuilder
      * @param array $table Array of tables where key used as alias and value used as tablename.
+     * @param QueryBuilder $queryBuilder
      * @return QueryBuilder
      */
-    public function getSortBy(QueryBuilder $queryBuilder, array $table): QueryBuilder
+    public function getSortBy(array $table, QueryBuilder $queryBuilder): QueryBuilder
     {
         $demands = $this->getDemandsFromDemandProviders();
         $sortingArguments = $demands['orderBy'] ?? [];
