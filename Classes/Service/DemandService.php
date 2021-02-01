@@ -268,6 +268,8 @@ class DemandService implements \TYPO3\CMS\Core\SingletonInterface
     }
 
     /**
+     * Resolving properties from tables given in demands.
+     *
      * @param array $tables
      * @param array $demands
      * @return array
@@ -329,15 +331,51 @@ class DemandService implements \TYPO3\CMS\Core\SingletonInterface
     }
 
     /**
+     * Add sorting to QueryBuilder from demands.
+     *
      * @param QueryBuilder $queryBuilder
+     * @param array $table Array of tables where key used as alias and value used as tablename.
+     * @return QueryBuilder
      */
-    public function getSortBy(QueryBuilder $queryBuilder): void
+    public function getSortBy(QueryBuilder $queryBuilder, array $table): QueryBuilder
     {
         $demands = $this->getDemandsFromDemandProviders();
-        $queryBuilder->orderBy($demands['orderBy'], $demands['orderDirection']);
+        $sortingArguments = $demands['orderBy'] ?? [];
+        $properties = ConfigurationUtility::getExtensionConfiguration()['properties'];
+
+        foreach ($sortingArguments as $argument) {
+            [$propertyName, $orderingDirection] = GeneralUtility::trimExplode(',', $argument);
+            $property = $properties[$propertyName];
+
+            if (null === $property) {
+                throw new \UnexpectedValueException(
+                    'Demanded property does not exist!'
+                );
+            }
+
+            $propertyTable = $property['table'];
+            $propertyField = $property['field'];
+            $tableAlias = $propertyTable;
+
+            foreach ($table as $alias => $tableName) {
+                if ($propertyTable === $tableName) {
+                    $tableAlias = $alias;
+                }
+            }
+
+            if ($orderingDirection) {
+                $queryBuilder->addOrderBy($tableAlias . '.' . $propertyField, strtoupper($orderingDirection));
+            } else {
+                $queryBuilder->addOrderBy($tableAlias . '.' . $propertyField);
+            }
+        }
+
+        return $queryBuilder;
     }
 
     /**
+     * Filter demands for existing only properties.
+     *
      * @param array $properties
      * @param array $demands
      * @return array
