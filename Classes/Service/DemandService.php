@@ -10,6 +10,7 @@ use Pixelant\Demander\Utility\DemandArrayUtility;
 use Pixelant\Demander\Utility\UiArrayUtility;
 use TYPO3\CMS\Core\Database\Query\Expression\CompositeExpression;
 use TYPO3\CMS\Core\Database\Query\Expression\ExpressionBuilder;
+use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -322,6 +323,41 @@ class DemandService implements \TYPO3\CMS\Core\SingletonInterface
             }
         }
 
-        return array_merge_recursive($demandedProperties, $demands);
+        $filteredDemands = $this->filterDemandedProperties($demandedProperties, $demands);
+
+        return array_merge_recursive($demandedProperties, $filteredDemands);
+    }
+
+    /**
+     * @param QueryBuilder $queryBuilder
+     */
+    public function getSortBy(QueryBuilder $queryBuilder): void
+    {
+        $demands = $this->getDemandsFromDemandProviders();
+        $queryBuilder->orderBy($demands['orderBy'], $demands['orderDirection']);
+    }
+
+    /**
+     * @param array $properties
+     * @param array $demands
+     * @return array
+     */
+    public function filterDemandedProperties(array $properties, array $demands): array
+    {
+        $filteredProperties = [];
+
+        foreach ($demands as $key => $demand) {
+            foreach ($properties as $property) {
+                if ($key === 'or' || $key === 'and') {
+                    $filteredProperties[$key] = $this->filterDemandedProperties($properties, $demand);
+                } else {
+                    if (array_key_exists($key, $properties) || array_key_exists($key, $property)) {
+                        $filteredProperties[$key] = $demand;
+                    }
+                }
+            }
+        }
+
+        return $filteredProperties;
     }
 }
