@@ -160,6 +160,18 @@ class DemandArrayUtility
                 )->__toString();
             case 'in':
                 return $expressionBuilder->in($fieldname, $restrictions['value']);
+            case 'likeAndCSL':
+                $array = [];
+                foreach ($restrictions['value'] as $value){
+                    $array[] = $expressionBuilder->like($fieldname,'\'%,'.$value.',%\'');
+                }
+               return $expressionBuilder->andX(...$array)->__toString();
+            case 'likeOrCSL':
+                $array = [];
+                foreach ($restrictions['value'] as $value){
+                    $array[] = $expressionBuilder->like($fieldname,'\'%,'.$value.',%\'');
+                }
+                return $expressionBuilder->orX(...$array)->__toString();
             default:
                 return $fieldname;
         }

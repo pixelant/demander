@@ -33,4 +33,30 @@
       property_name3.value = 6
       }
   }
+
+
+  //Demander filtering from Product Manager
+          product_type {
+            table = tx_pxaproductmanager_domain_model_attributevalue
+            field = value
+            operator = likeAndCSL
+            additionalRestriction {
+                tx_pxaproductmanager_domain_model_attributevalue-attribute {
+                    operator = =
+                    value = 5
+                }
+            }
+        }
+
+        product_gun_type {
+            table = tx_pxaproductmanager_domain_model_attributevalue
+            field = value
+            operator = likeOrCSL
+            additionalRestriction {
+                tx_pxaproductmanager_domain_model_attributevalue-attribute {
+                    operator = =
+                    value = 4
+                }
+            }
+        }
 ```
