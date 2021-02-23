@@ -6,4 +6,11 @@ namespace Pixelant\Demander\DemandProvider;
 
 class PageDemandProvider implements DemandProviderInterface
 {
+    /**
+     * @return array
+     */
+    public function getDemand(): array
+    {
+        return [];
+    }
 }
