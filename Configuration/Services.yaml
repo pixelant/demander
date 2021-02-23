@@ -7,5 +7,5 @@ services:
   Pixelant\Demander\:
     resource: '../Classes/*'
 
-  Pixelant\Demander\Service\DemandService\:
+  Pixelant\Demander\Service\DemandService:
     public: true
